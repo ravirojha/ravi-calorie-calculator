@@ -15,7 +15,6 @@ export default class FoodController {
   async get(@Query() query, @Req() req) {
     let { startDate, endDate } = query;
     if (query.startDate && query.endDate) {
-      // console.log(query)
       ({ startDate, endDate } = validateDates(query.startDate, query.endDate));
     }
     return this.foodService.get(query.page, { fromDate: startDate, toDate: endDate }, req.user);
@@ -67,8 +66,8 @@ export default class FoodController {
 }
 
 const FoodSchema = Joi.object({
-  datetime: Joi.string().custom((val, handler) => customValidator(val, handler)), //string , custom validator
-  name: Joi.string().min(4).required(),
+  datetime: Joi.string().custom((val, handler) => customValidator(val, handler)).required(), //string , custom validator
+  name: Joi.string().min(1).required(),
   calorie: Joi.number().min(1).max(5000).required(),
   price: Joi.number().min(1).max(1000).required(),
   userEmail: Joi.string().email().allow(null),
@@ -88,9 +87,7 @@ function validateDates(startDate, endDate) {
 }
 
 function customValidator(val, handler) {
-  console.log(val);
   const date = moment(val).format("YYYY-MM-DD HH:mm:ss");
-  console.log(date);
   if (date < moment().add(1, "day").format("YYYY-MM-DD HH:mm:ss")) {
     return val;
   } else {

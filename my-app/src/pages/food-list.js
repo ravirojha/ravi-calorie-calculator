@@ -46,6 +46,10 @@ function FoodList() {
       .then((res) => {
           setPageCount(res?.data.pageCount)
           setFoodData(res?.data.foodData);
+          if (page > res?.data.pageCount){
+
+              setPage(res?.data.pageCount);
+          }
          setIsLoading(false)
       })
       .catch((error) => toast.error(error.response.data.message));
@@ -64,7 +68,7 @@ function FoodList() {
                       <Header isNew={isNew} fromDate={fromDate} change={change}
                               toDate={toDate} reload={reload} page={page}/>
 
-                      {isNew ? <FoodCard foodItem={{}} isNew={isNew} change={change} reload={reload}/> : <></>}
+                      {isNew ? <FoodCard foodItem={{datetime:'',name:'',calorie:'',price:''}} isNew={isNew} change={change} reload={reload}/> : <></>}
                       <TableHeader/>
                       <div className="food-list">
                           {foodData.length > 0 ? (foodData?.map((food) => (

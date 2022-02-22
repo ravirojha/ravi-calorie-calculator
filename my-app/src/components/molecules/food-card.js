@@ -14,6 +14,18 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
   const {user, setUser} = useContext(AuthContext);
 
 
+    const validateData = () => {
+        if (!foodItemData.datetime) toast.error("Datetime is Required");
+        else if (foodItemData.name.trim().length < 1)
+            toast.error("Valid foodname of atleast 1 char is required");
+        else if (!foodItemData.calorie || foodItemData.calorie < 1) toast.error("Provide a valid calorie value");
+        else if (foodItemData.calorie > 5000) toast.error("Calorie should be less than 5000");
+        else if (!foodItemData.price || foodItemData.price < 1) toast.error("Provide a valid price");
+        else if (foodItemData.price > 1000) toast.error(("Price should be less than 1000"));
+        else return true;
+    };
+
+
 
   function handleDelete(id) {
       FoodService.deleteFood(id, token).then((res) => {
@@ -28,32 +40,37 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
 
 
   function handleUpdate(id) {
-    FoodService.updateFood(id, {...foodItemData}, token).then(res => {
-        res.data.budgetReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  monthly Budget limit`, {
-            position: toast.POSITION.TOP_RIGHT
-        });
-        res.data.calorieReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  daily calorie limit`,{
-            position: toast.POSITION.TOP_RIGHT
-        });
-        setIsEditing(!isEditing);
-        toast.success("Updated Successfully");
-        reload();
-    }).catch((e) => {
-        let error = e.response.data.message;
-        toast.error(error)});
+      if(validateData()) {
+          FoodService.updateFood(id, {...foodItemData}, token).then(res => {
+              res.data.budgetReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  monthly Budget limit`, {
+                  position: toast.POSITION.TOP_RIGHT
+              });
+              res.data.calorieReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  daily calorie limit`, {
+                  position: toast.POSITION.TOP_RIGHT
+              });
+              setIsEditing(!isEditing);
+              toast.success("Updated Successfully");
+              reload();
+          }).catch((e) => {
+              let error = e.response.data.message;
+              toast.error(error)
+          });
+      }
   }
 
 
   function handleAdd() {
-      FoodService.createFood({...foodItemData}, token).then(res => {
-          change('new', !isNew);
-          toast.success("Food Item Added");
-          reload();
-      }).catch((e) => {
-          let error = e.response.data.message;
-          toast.error(error)
+      if(validateData()) {
+          FoodService.createFood({...foodItemData}, token).then(res => {
+              change('new', !isNew);
+              toast.success("Food Item Added");
+              reload();
+          }).catch((e) => {
+                  let error = e.response.data.message;
+                  toast.error(error)
+              }
+          )
       }
-      )
   }
 
 
@@ -76,7 +93,7 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
               dateFormat="MMM d, yyyy h:mm aa"
               id="date"
               endDate={new Date()}
-              selected={Object.keys(foodItemData).length > 0 ? moment(foodItemData.datetime).toDate() : ''}
+              selected={foodItemData.datetime ? moment(foodItemData.datetime).toDate() : ''}
               onChange={(value) => {
                 setFoodItemData({ ...foodItemData, datetime: value });
               }}
@@ -183,7 +200,11 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
         {isEditing ? (
           <i
             className={'fa fa-close  dlt-btn'}
-            onClick={() => setIsEditing(!isEditing) || change('new', false)}
+            onClick={() => {
+                setIsEditing(!isEditing);
+                change('new', false);
+                setFoodItemData(foodItem);
+            }}
           ></i>
         ) : (
           <i

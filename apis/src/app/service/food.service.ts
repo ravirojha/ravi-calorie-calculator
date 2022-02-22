@@ -9,12 +9,20 @@ import * as moment from "moment";
 @Injectable()
 export default class FoodService {
   async get(p: string, { fromDate, toDate }, authUser) {
+
+
+
     const user = await User.find({
       select: ["id", "dailyCalorieLimit", "monthlyBudget", "email"],
     });
 
     const query: FindCondition<Food> = {};
-    if (fromDate && toDate) query.datetime = Between(fromDate, toDate);
+    if (fromDate && toDate) {
+      console.log(fromDate, toDate, '=====');
+      fromDate = moment(fromDate).subtract(1,'day').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+      toDate = moment(toDate).add(1, "day").endOf('day').format('YYYY-MM-DD HH:mm:ss');
+      query.datetime = Between(fromDate, toDate);
+    }
     const page = Math.max(Number(p) || 1, 1);
 
     if (!authUser.isAdmin) query.userId = authUser.id;
@@ -24,6 +32,7 @@ export default class FoodService {
       skip: (page - 1) * PageSize,
       order: { datetime: "DESC" },
     });
+
 
     const userMap = {};
     user.forEach(particularUser => {
@@ -53,7 +62,6 @@ export default class FoodService {
       .getRawMany();
 
     const users = await getRepository(User).createQueryBuilder("user").select(["user.id", "user.dailyCalorieLimit", "user.monthlyBudget"]).getRawMany();
-    // console.log(foods,'=============================');
     const foodsTemp = foods.map(async f => {
       dailyCalorieConsumed.forEach(dcc => {
         if (dcc?.food_dateDaily === f.dateDaily && dcc?.food_userId === f.userId) f["dailyCalorieSum"] = dcc?.sum;
@@ -147,8 +155,6 @@ export default class FoodService {
         const totalBudget = foodDataMonthly.reduce((prev, curr) => prev + curr.price, 0);
         food["calorieReached"] = totalCalorie > user.dailyCalorieLimit;
         food["budgetReached"] = totalBudget > user.monthlyBudget;
-        console.log(food, "====================================================");
-        console.log(foodDataDaily, totalCalorie, user.dailyCalorieLimit);
         return food;
       } else throw new NotFoundException();
     } else throw new HttpException("Permission denied", 403);

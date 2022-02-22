@@ -9,7 +9,7 @@ function TableHeader() {
       <div className="table-header">
         <div className="header-content">
           <span className="date alignment">Date</span>
-          {user?.isAdmin && <span className="email alignment">Email</span>}
+          {user?.isAdmin && <span className="email alignment">User Email</span>}
           <span className="name alignment">Name</span>
           <span className="calorie alignment">Calories</span>
           <span className="price alignment">Price</span>

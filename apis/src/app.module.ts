@@ -12,7 +12,7 @@ import User from './entity/user';
       database: 'sqlite.db',
       synchronize: true,
       entities: [User, Food],
-      // logging: true,
+      logging: true,
     }),
   ],
   controllers: [FoodController],
