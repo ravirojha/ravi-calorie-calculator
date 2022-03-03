@@ -4,7 +4,7 @@ import { verifyJwtToken } from "../../utils";
 export default class AdminGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const token = request.headers.jwt;
+    const token = request.headers?.jwt;
     const user = await verifyJwtToken(token);
     if (user) {
       request.user = user;

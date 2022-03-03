@@ -11,14 +11,13 @@ export const JoiValidate = (schema: ObjectSchema, data: Record<string, string | 
   return value;
 };
 
-export const JwtSecret = "r38746sgdkjs834798bshkdshadg";
+export const JwtSecret = "uyqwte7623encyst8723et87eyd2387ey";
 
 export const verifyJwtToken = async (token: string) => {
   try {
     const decoded = Jwt.verify(token, JwtSecret);
     const { id } = decoded;
-    const user = await User.findOne(id);
-    return user;
+    return await User.findOne(id);
   } catch (e) {
     return null;
   }

@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import User from "./user";
 
 @Entity({ name: "food" })
 export default class Food extends BaseEntity {
@@ -10,4 +11,10 @@ export default class Food extends BaseEntity {
   @Column() name: string;
   @Column() calorie: number;
   @Column() price: number;
+
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
+  user: User;
 }

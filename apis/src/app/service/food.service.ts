@@ -9,9 +9,6 @@ import * as moment from "moment";
 @Injectable()
 export default class FoodService {
   async get(p: string, { fromDate, toDate }, authUser) {
-
-
-
     const user = await User.find({
       select: ["id", "dailyCalorieLimit", "monthlyBudget", "email"],
     });
