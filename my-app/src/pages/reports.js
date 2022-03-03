@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 import ReportsApi from '../api-services/reports.api';
 import ReportsCard from '../components/atoms/reports-card';
 import ReportService from "../api-services/reports-service";
-import {token} from "../api-services/user-service";
+import {AuthContext} from "../App";
 
 function Reports() {
   const [reports, setReports] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const {user} = useContext(AuthContext)
 
   useEffect(() => {
-    ReportService.fetchReports(token).then((response) => {
+    ReportService.fetchReports(user).then((response) => {
       setReports(response.data);
       setIsLoading(false);
     });
@@ -24,7 +25,8 @@ function Reports() {
         <Loader active />
       ) : (
         <StyledComponent>
-          <div className="cards">
+          <div className="container">
+            <div className="cards">
             <ReportsCard
               header={'Entries Added in Last 7 Days'}
               data={reports.foodLastWeek.length}
@@ -38,6 +40,7 @@ function Reports() {
               data={reports.avgCalorie}
             />
           </div>
+          </div>
         </StyledComponent>
       )}
     </>
@@ -47,9 +50,14 @@ function Reports() {
 export default Reports;
 
 const StyledComponent = styled.div`
-  .cards {
+  .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 6rem;
+  }
+  
+  .cards {
+  padding-bottom: 2rem;
   }
 `;

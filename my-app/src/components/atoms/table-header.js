@@ -48,7 +48,7 @@ const StyledComponent = styled.div`
   }
   
   .email{
-    flex: .3;
+    flex: .4;
   }
   
   .name{

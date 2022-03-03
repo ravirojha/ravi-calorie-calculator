@@ -10,12 +10,14 @@ import UserService from "./api-services/user-service";
 import NotFound from "./pages/PermissionDenied";
 import ProtectedRoute from "./components/molecules/ProtectedRoute";
 import {useCookies} from "react-cookie";
+import Login from "./pages/login";
+import Users from "./pages/users";
+import SignUp from "./pages/signup";
 
 export const AuthContext = React.createContext();
 
 function App() {
   const [user, setUser] = useState(null);
-
   const [cookie, setCookie] = useCookies(['user']);
 
   useEffect(() => {
@@ -24,28 +26,41 @@ function App() {
               setUser(cookie.user);
           }
       }
-    UserService.fetchLoggedInUserDetails()
-        .then(res => {
-          setUser(res.data);
-          setCookie('user', res.data);
-        })
-        .catch((error) => toast.error(error.response.data.message))
-  },[]);
+    // UserService.fetchLoggedInUserDetails()
+    //     .then(res => {
+    //       setUser(res.data);
+    //       setCookie('user', res.data);
+    //     })
+    //     .catch((error) => toast.error(error.response.data.message))
+  },[cookie.user, user]);
 
   return (
     <AuthContext.Provider value={{user, setUser}}>
       <div className="App">
         <Toast />
         <Router>
-          <NavBar />
+            {user && <NavBar/>}
           <Routes>
-            {user && <Route path={'/'} element={<FoodList />} />}
-            <Route
-                path={'/reports'}
-                element={
-                    <ProtectedRoute element={<Reports />} />
-                }
-            />
+              {!user &&
+              <>
+                  <Route path={'/login'} element={<Login/>}/>
+                  <Route path={'/signup'} element={<SignUp/>}/>
+              </>
+              }
+            {user &&
+                <>
+                    <Route path={'/'} element={<FoodList />} />
+                    <Route
+                     path={'/reports'}
+                     element={<ProtectedRoute element={<Reports />} />}
+                     />
+                    <Route
+                        path={'/users'}
+                        element={<ProtectedRoute element={<Users />} />}
+                    />
+                </>
+            }
+            <Route path={'/'} element={<Login/>}/>
             <Route path={'/not-found'} element={<NotFound />}/>
             <Route path={'*'} element={<NotFound />} />
           </Routes>

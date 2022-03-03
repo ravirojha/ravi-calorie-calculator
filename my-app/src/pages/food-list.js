@@ -42,7 +42,7 @@ function FoodList() {
     const startDate = fromDate ? moment(fromDate).format('YYYY-MM-DD[T]hh:mm:ss') : null;
     const endDate = toDate ? moment(toDate).format('YYYY-MM-DD[T]hh:mm:ss') : null;
 
-    FoodService.fetchFoods({ page, startDate, endDate }, token)
+    FoodService.fetchFoods({ page, startDate, endDate }, user)
       .then((res) => {
           setPageCount(res?.data.pageCount)
           setFoodData(res?.data.foodData);
@@ -105,6 +105,7 @@ const StyledComponent = styled.div`
     display: flex;
     flex-direction: column;
     width: 95%;
+    padding-top: 6rem;
   }
   .food-list {
     display: flex;

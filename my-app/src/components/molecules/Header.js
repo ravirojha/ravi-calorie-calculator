@@ -71,7 +71,7 @@ const StyledComponent = styled.div`
     height: 2rem;
     width: 3rem;
     border-radius: 15%;
-    background: #3182ce;
+    background: #db2828;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -87,7 +87,7 @@ const StyledComponent = styled.div`
     height: 35px;
     font-weight: 600;
     border-radius: 15%;
-    background: #3182ce;
+    background: #db2828;
     color: #fff;
     margin: 2% 2%;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,

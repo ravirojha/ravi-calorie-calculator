@@ -6,7 +6,6 @@ import DatePicker from 'react-datepicker';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../App';
 import FoodService from "../../api-services/food-service";
-import {token} from "../../api-services/user-service";
 
 export default function FoodCard({ foodItem, isNew, change, reload }) {
   const [isEditing, setIsEditing] = useState(isNew);
@@ -28,7 +27,7 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
 
 
   function handleDelete(id) {
-      FoodService.deleteFood(id, token).then((res) => {
+      FoodService.deleteFood(id, user).then((res) => {
         toast.success('Deleted Successfully!');
         reload();
       }).catch((e) => {
@@ -41,7 +40,7 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
 
   function handleUpdate(id) {
       if(validateData()) {
-          FoodService.updateFood(id, {...foodItemData}, token).then(res => {
+          FoodService.updateFood(id, {...foodItemData}, user).then(res => {
               res.data.budgetReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  monthly Budget limit`, {
                   position: toast.POSITION.TOP_RIGHT
               });
@@ -61,7 +60,7 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
 
   function handleAdd() {
       if(validateData()) {
-          FoodService.createFood({...foodItemData}, token).then(res => {
+          FoodService.createFood({...foodItemData}, user).then(res => {
               change('new', !isNew);
               toast.success("Food Item Added");
               reload();
@@ -273,10 +272,12 @@ const StyledComponent = styled.div`
 
   .date{
     flex: 0.25;
+    min-width: 60px;
+    max-height: 90px;
   }
 
   .email{
-    flex: .3;
+    flex: .4;
   }
 
   .name{

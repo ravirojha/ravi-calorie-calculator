@@ -1,21 +1,20 @@
-import * as faker from 'faker';
-import { Util } from '../utils';
+import { Util, URL } from '../utils';
 import Axios from "axios";
 export default class FoodService {
-    static createFood = async ({ datetime, name, calorie, price, userEmail }, token) => {
-        return Axios.post('http://localhost:3000/food',{datetime, name, calorie, price, userEmail },{
+    static createFood = async ({ datetime, name, calorie, price, userEmail }, {jwt}) => {
+        return Axios.post(`${URL}/food`,{datetime, name, calorie, price, userEmail },{
             headers: {
-                jwt: token
+                jwt
             }
         })
     }
 
 
-  static fetchFoods = async ( {page = '1',startDate, endDate }, token) => {
-    return  Axios.get(`http://localhost:3000/food`,
+  static fetchFoods = async ( {page = '1',startDate, endDate }, {jwt}) => {
+    return  Axios.get(`${URL}/food`,
     {
       headers: {
-        jwt: token
+        jwt
       },
         params: {
           startDate,
@@ -30,21 +29,21 @@ export default class FoodService {
         datetime,
         name,
         calorie,
-        price,}, token) => {
-        return Axios.put(`http://localhost:3000/food/${id}`, {datetime, name, calorie, price},
+        price,}, {jwt}) => {
+        return Axios.put(`${URL}/food/${id}`, {datetime, name, calorie, price},
             {
                 headers: {
-                    jwt: token
+                    jwt
                 }
             }
         )
     }
 
-    static deleteFood = async(id, token) => {
-        return Axios.delete(`http://localhost:3000/food/${id}`,
+    static deleteFood = async(id, {jwt}) => {
+        return Axios.delete(`${URL}/food/${id}`,
             {
                 headers: {
-                    jwt: token
+                    jwt
                 }
             }
         )

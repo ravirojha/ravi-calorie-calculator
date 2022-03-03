@@ -5,8 +5,10 @@ function ReportsCard({ header, data }) {
   return (
     <Card
       style={{
-        height: '140px',
-        width: '450px'
+        height: '22vh',
+        width: '40vw',
+          minWidth: '300px',
+          minHeight: '160px'
       }}
     >
       <Card.Content
