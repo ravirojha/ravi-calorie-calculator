@@ -11,13 +11,16 @@ export default function UserCard({ userItem, isNew, change, reload }) {
     const {user, setUser} = useContext(AuthContext);
 
     const validateData = () => {
-        if (!userItemData.datetime) toast.error("Datetime is Required");
+        if (!userItemData.name) toast.error("Name is Required");
         else if (userItemData.name.trim().length < 1)
-            toast.error("Valid username of atleast 1 char is required");
-        else if (!userItemData.calorie || userItemData.calorie < 1) toast.error("Provide a valid calorie value");
-        else if (userItemData.calorie > 5000) toast.error("Calorie should be less than 5000");
-        else if (!userItemData.price || userItemData.price < 1) toast.error("Provide a valid price");
-        else if (userItemData.price > 1000) toast.error(("Price should be less than 1000"));
+            toast.error("Valid name of atleast 1 char is required");
+        else if (!userItemData.email || (!String(userItemData.email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            ))) toast.error("Provide a valid email address");
+        else if (!userItemData.dailyCalorieLimit || userItemData.dailyCalorieLimit > 2100) toast.error("Enter valid calorie limit");
+        else if (!userItemData.monthlyBudget || userItemData.monthlyBudget > 5000) toast.error(("Enter valid monthly budget"));
         else return true;
     };
 
@@ -199,6 +202,7 @@ const StyledComponent = styled.div`
   .user-card {
     display: flex;
     width: 100%;
+    padding: 0 8px;
     margin: 1% 2%;
     justify-content: flex-start;
     align-items: center;

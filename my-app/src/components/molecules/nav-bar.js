@@ -2,9 +2,11 @@ import React, {useContext, useState} from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { useCookies} from "react-cookie";
 import { Menu } from 'semantic-ui-react';
+import Avatar from '@mui/material/Avatar';
 import styled from 'styled-components';
 import { AuthContext } from '../../App';
 import {toast} from "react-toastify";
+import AvatarIcon from "../atoms/avatar";
 
 function NavBar() {
   const location = useLocation();
@@ -59,9 +61,7 @@ function NavBar() {
               </div>
           )}
         </Menu>
-        <button onClick={handleLogout} className='logout'>
-          Logout
-        </button>
+        <AvatarIcon handleLogout={handleLogout} />
       </div>
     </StyledComponent>
   );
@@ -82,20 +82,6 @@ const StyledComponent = styled.div`
   
   .menu-bar {
   flex: 1;
-  }
-  
-  .logout {
-  position: fixed;
-  right: 5%;
-  top: 3%;
-  border: none;
-  color: #fff;
-  font-size: 1.14285714rem;
-  cursor: pointer;
-  background-color: #db2828;
-  height: 2.5rem;
-  border-radius: 5px;
-  font-weight: 600;
   }
  
 `;

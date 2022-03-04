@@ -58,7 +58,7 @@ export default function AvatarIcon({handleLogout}) {
 const StyledComponent = styled.div`
 .avatar {
     position: fixed;
-    right: 5%;
-    top: 0.9%;
+    right: 3rem;
+    top: 0.8%;
 }
 `;

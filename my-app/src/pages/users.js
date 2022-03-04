@@ -54,8 +54,11 @@ function Users() {
     return (
         isLoading ? <Loader active/> :
             <StyledComponent>
+                <button className='add-user' onClick={() => change('new', !isNew)}>
+                    <i className="fa fa-plus add-btn"/><span >Add User</span>
+                </button>
                 <div className="user-page">
-                    {isNew ? <UserCard userItem={{}} isNew={isNew} change={change} reload={reload}/> : <></>}
+                    {isNew ? <UserCard userItem={{name: '', email: '', isAdmin: false, dailyCalorieLimit: '', monthlyBudget: ''}} isNew={isNew} change={change} reload={reload}/> : <></>}
                     <UserTableHeader/>
                     <div className="user-list">
                         {userData.length > 0 ? (userData?.map((singleUser) => (
@@ -111,5 +114,25 @@ const StyledComponent = styled.div`
     height: 2.2rem;
     width: 12rem;
     font-size: 1.2rem;
+  }
+
+  .add-user {
+  position: absolute;
+  z-index: 99;
+  width: 100px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #db2828;
+  height: 2.5rem;
+  border-radius: 5px;
+  font-weight: 600;
+  right: 10rem;
+  top: 3%;
+  }
+  
+  .add-user > span {
+  padding-left: 8px;
   }
 `;
