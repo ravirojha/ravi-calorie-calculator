@@ -5,8 +5,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import styled from "styled-components";
+import {useContext} from "react";
+import {AuthContext} from "../../App";
 
 export default function AvatarIcon({handleLogout}) {
+    const {user} = useContext(AuthContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -46,6 +49,7 @@ export default function AvatarIcon({handleLogout}) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
+                        <MenuItem><b>Hello!!!<span style={{paddingLeft: '2px'}}>{user.name}</span></b></MenuItem>
                         <MenuItem onClick={handleClose}>Settings</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>

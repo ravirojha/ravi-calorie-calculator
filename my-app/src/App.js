@@ -6,13 +6,13 @@ import Reports from './pages/reports';
 import Toast from './components/atoms/Toast';
 import React, {useEffect, useState} from 'react';
 import toast from "./components/atoms/Toast";
-import UserService from "./api-services/user-service";
 import NotFound from "./pages/PermissionDenied";
 import ProtectedRoute from "./components/molecules/ProtectedRoute";
 import {useCookies} from "react-cookie";
 import Login from "./pages/login";
 import Users from "./pages/users";
 import SignUp from "./pages/signup";
+import User from "./pages/user";
 
 export const AuthContext = React.createContext();
 
@@ -58,6 +58,7 @@ function App() {
                         path={'/users'}
                         element={<ProtectedRoute element={<Users />} />}
                     />
+                    <Route path={'/user/:id'} element={<ProtectedRoute element={<User/>} />}/>
                 </>
             }
             <Route path={'/'} element={<Login/>}/>
