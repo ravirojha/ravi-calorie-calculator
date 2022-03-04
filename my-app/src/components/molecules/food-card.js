@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Input } from 'semantic-ui-react';
+import { TextField } from '@mui/material';
 import moment from 'moment';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
@@ -103,36 +103,38 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
                 required
             />
           )}
-          {user?.isAdmin ? (
+          {user?.isAdmin && (
             !isEditing ? (
               <span className="email alignment"> {foodItemData.userEmail}</span>
             ) : (
-              <Input
+              <TextField
+                  id="outlined-name"
                   disabled={!isNew}
-                value={foodItemData.userEmail}
-                placeholder="User email"
+                  value={foodItemData.userEmail}
+                  placeholder="User email"
                   type="email"
-                onChange={(e) =>
-                  setFoodItemData( prevValue => {
-                      return  {...prevValue, userEmail: e.target.value}
-                  })
-                }
+                  onChange={(e) =>
+                      setFoodItemData( prevValue => {
+                          return  {...prevValue, userEmail: e.target.value}
+                      })
+                  }
               />
             )
-          ) : null}
+          )}
           {!isEditing ? (
             <span className="name alignment"> {foodItemData.name}</span>
           ) : (
-            <Input
+              <TextField
+              id="outlined-name"
               value={foodItemData.name}
               placeholder="Name of food item"
               type="string"
               minLength="4"
               required
               onChange={(e) =>
-                setFoodItemData({ ...foodItemData, name: e.target.value })
-              }
-            />
+              setFoodItemData({ ...foodItemData, name: e.target.value })
+          }
+              />
           )}
           {!isEditing ? (
             <span className="calorie alignment">
@@ -143,7 +145,8 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
                 }
             </span>
           ) : (
-            <Input
+              <TextField
+              id="outlined-name"
               value={foodItemData.calorie}
               placeholder="Calories"
               type="number"
@@ -151,9 +154,10 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
               max="5000"
               required
               onChange={(e) =>
-                setFoodItemData({ ...foodItemData, calorie: e.target.value })
-              }
-            />
+              setFoodItemData({ ...foodItemData, calorie: e.target.value })
+          }
+              />
+
           )}
           {!isEditing ? (
             <span className="price alignment">
@@ -164,7 +168,8 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
               }
             </span>
           ) : (
-            <Input
+              <TextField
+              id="outlined-name"
               placeholder="Price"
               value={foodItemData.price}
               type="number"
@@ -172,9 +177,9 @@ export default function FoodCard({ foodItem, isNew, change, reload }) {
               max="1000"
               required
               onChange={(e) =>
-                setFoodItemData({ ...foodItemData, price: e.target.value })
-              }
-            />
+              setFoodItemData({ ...foodItemData, price: e.target.value })
+          }
+              />
           )}
         </div>
 
@@ -226,7 +231,7 @@ const StyledComponent = styled.div`
     justify-content: flex-start;
     align-items: center;
     padding: 5px;
-    height: 4rem;
+    height: 5rem;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
       rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   }

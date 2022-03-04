@@ -39,19 +39,19 @@ export default class UsersService {
     } else throw new HttpException('Email already exists', 400);
   }
 
-  // async get(p =  '1', authUser) {
-  //   const page = Math.max(Number(p) || 1, 1);
-  //   const users = await User.find({
-  //     take: PageSize,
-  //     skip: (page - 1) * PageSize,
-  //   });
-  //
-  //   const totalUserCount = await User.count();
-  //   const pageCount = Math.ceil(totalUserCount / PageSize);
-  //
-  //   return { users, page, pageCount };
-  // }
-  //
+  async get(p =  '1', authUser) {
+    const page = Math.max(Number(p) || 1, 1);
+    const users = await User.find({
+      take: PageSize,
+      skip: (page - 1) * PageSize,
+    });
+
+    const totalUserCount = await User.count();
+    const pageCount = Math.ceil(totalUserCount / PageSize);
+
+    return { users, page, pageCount };
+  }
+
   // async add({name, email, password, isAdmin}, authUser) {
   //   const check = await User.find({
   //     where: {

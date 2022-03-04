@@ -30,8 +30,8 @@ function NavBar() {
           <div>
           <Link to={'/'}>
             <Menu.Item
-              name="food"
-              active={activeItem === '/' || activeItem === 'food'}
+              name="foods"
+              active={activeItem === '/' || activeItem === 'foods'}
               onClick={handleItemClick}
             />
           </Link>
@@ -40,8 +40,8 @@ function NavBar() {
               <div>
             <Link to={'/reports'}>
               <Menu.Item
-                name="report"
-                active={activeItem === '/reports' || activeItem === 'report'}
+                name="reports"
+                active={activeItem === '/reports' || activeItem === 'reports'}
                 onClick={handleItemClick}
               />
             </Link>
@@ -51,7 +51,7 @@ function NavBar() {
               <div>
               <Link to={'/users'}>
                 <Menu.Item
-                    name="Users"
+                    name="users"
                     active={activeItem === '/users' || activeItem === 'users'}
                     onClick={handleItemClick}
                 />
@@ -72,7 +72,7 @@ export default NavBar;
 const StyledComponent = styled.div`
   .nav-bar {
     width: 100%;
-    padding-top: 20px;
+    padding: 20px 15px 0 15px;
     display: flex;
     align-items: center;
     position: fixed;

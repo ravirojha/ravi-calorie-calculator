@@ -20,12 +20,12 @@ export default class UsersController {
     return this.usersService.signup({ email, password, name });
   }
 
-  // @UseGuards(AdminGuard)
-  // @Get('')
-  // async get(@Query() query, @Req() req) {
-  //   return this.usersService.get(query.page, req.user);
-  // }
-  //
+  @UseGuards(AdminGuard)
+  @Get('')
+  async get(@Query() query, @Req() req) {
+    return this.usersService.get(query.page, req.user);
+  }
+
   // @UseGuards(AdminGuard)
   // @Post('')
   // async add(@Body() body, @Req() req) {
