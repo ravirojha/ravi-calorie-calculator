@@ -24,6 +24,16 @@ export default class UserService {
 
   };
 
+  static getUserById = async ({id}, { jwt }) => {
+    return await axios.get(`${URL}/users/${id}`,
+        {
+          headers: {
+            jwt
+          }
+        });
+
+  };
+
   static addUser = async ({name, email, password, isAdmin, dailyCalorieLimit, monthlyBudget}, { jwt }) => {
     return await axios.post(`${URL}/users`, {
       name,

@@ -21,6 +21,9 @@ export default function UserCard({ userItem, isNew, change, reload }) {
             ))) toast.error("Provide a valid email address");
         else if (!userItemData.dailyCalorieLimit || userItemData.dailyCalorieLimit > 2100) toast.error("Enter valid calorie limit");
         else if (!userItemData.monthlyBudget || userItemData.monthlyBudget > 5000) toast.error(("Enter valid monthly budget"));
+        else if (userItemData.password && userItemData.password.length < 4) {
+            toast.error("Password length must be atleast 4 characters long")
+        }
         else return true;
     };
 
@@ -41,12 +44,6 @@ export default function UserCard({ userItem, isNew, change, reload }) {
     function handleUpdate(id) {
         if(validateData()) {
             UserService.updateUser(id, {...userItemData}, user).then(res => {
-                res.data.budgetReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  monthly Budget limit`, {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                res.data.calorieReached && toast.warning(`${!user.isAdmin ? 'You have ' : 'User has '} reached  daily calorie limit`, {
-                    position: toast.POSITION.TOP_RIGHT
-                });
                 setIsEditing(!isEditing);
                 toast.success("Updated Successfully");
                 reload();
@@ -111,6 +108,17 @@ export default function UserCard({ userItem, isNew, change, reload }) {
                         />
 
                     )}
+                    {isEditing && <TextField
+                        id="outlined-name"
+                        value={userItemData.password}
+                        placeholder="Password"
+                        type="password"
+                        onChange={(e) =>
+                            setUserItemData( prevValue => {
+                                return  {...prevValue, password: e.target.value}
+                            })
+                        }
+                    />}
                     {
                         !isEditing ? (
                             <Checkbox checked={userItemData.isAdmin} className='admin'/>
