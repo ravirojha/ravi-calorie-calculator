@@ -7,8 +7,10 @@ import Menu from '@mui/material/Menu';
 import styled from "styled-components";
 import {useContext} from "react";
 import {AuthContext} from "../../App";
+import {useNavigate} from "react-router-dom";
 
 export default function AvatarIcon({handleLogout}) {
+    const navigate = useNavigate();
     const {user} = useContext(AuthContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -17,6 +19,11 @@ export default function AvatarIcon({handleLogout}) {
     };
 
     const handleClose = () => {
+        setAnchorEl(null);
+    }
+
+    const handleSettings = () => {
+        navigate(`/user/${user.id}`);
         setAnchorEl(null);
     };
 
@@ -49,8 +56,8 @@ export default function AvatarIcon({handleLogout}) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem><b>Hello!!!<span style={{paddingLeft: '2px'}}>{user.name}</span></b></MenuItem>
-                        <MenuItem onClick={handleClose}>Settings</MenuItem>
+                        <MenuItem><b>Hello,<span style={{paddingLeft: '2px'}}>{user.name}!!!</span></b></MenuItem>
+                        <MenuItem onClick={handleSettings}>Settings</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>
                 </div>
