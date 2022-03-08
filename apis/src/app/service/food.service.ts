@@ -15,8 +15,7 @@ export default class FoodService {
 
     const query: FindCondition<Food> = {};
     if (fromDate && toDate) {
-      console.log(fromDate, toDate, '=====');
-      fromDate = moment(fromDate).subtract(1,'day').startOf('day').format('YYYY-MM-DD HH:mm:ss');
+      fromDate = moment(fromDate).subtract(1,'day').endOf('day').format('YYYY-MM-DD HH:mm:ss');
       toDate = moment(toDate).add(1, "day").endOf('day').format('YYYY-MM-DD HH:mm:ss');
       query.datetime = Between(fromDate, toDate);
     }

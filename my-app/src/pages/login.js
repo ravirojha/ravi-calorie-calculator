@@ -55,9 +55,12 @@ function Login() {
                 </Form>
                 <Link to={'/signup'}>
                 <Message>
-                    New here? <span style={{color: 'red'}}>Sign Up</span>
+                    New here? <span style={{color: '#db2828'}}>Sign Up</span>
                 </Message>
                 </Link>
+                <a target="_blank" rel="noreferrer"  href="https://docs.google.com/document/d/16PvgOV7Afj9Abjj_AiejMyxDjs4ihG9105FOlmcLHlg/edit?usp=sharing" >
+                    <span style={{color: '#B0B0B0'}}>Login Details</span>
+                </a>
             </Grid.Column>
         </Grid>
         </StyledComponent>

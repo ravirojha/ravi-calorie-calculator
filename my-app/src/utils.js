@@ -13,7 +13,7 @@ export const validateSignUpForm = (name, email, password) => {
     toast.error("Name cannot be empty")
   } else if (email === "") {
     toast.error("Email cannot be empty")
-  } else if (password === "") {
+  } else if (password === "" || password.trim().length === 0) {
     toast.error("Password cannot be empty")
   } else if (!String(email)
       .toLowerCase()
@@ -34,7 +34,7 @@ export const validateLoginForm = (email, password) => {
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )) {
     toast.error("Enter a valid email address");
-  } else if (password === "") {
+  } else if (password === ""|| password.trim().length === 0) {
     toast.error("Password cannot be empty");
   } else {
     return true;

@@ -80,5 +80,5 @@ const UserUpdateSchema = Joi.object({
   password: Joi.string(),
   isAdmin: Joi.boolean().required(),
   dailyCalorieLimit: Joi.number().min(100).max(3000).required(),
-  monthlyBudget: Joi.number().min(500).max(10000).required()
+  monthlyBudget: Joi.number().min(100).max(10000).required()
 })

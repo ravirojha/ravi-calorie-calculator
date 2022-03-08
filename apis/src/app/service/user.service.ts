@@ -81,9 +81,9 @@ export default class UsersService {
   }
 
   async update(id, { name, email, password, isAdmin, dailyCalorieLimit, monthlyBudget }, authUser) {
-    if(authUser.isAdmin || authUser.id === id) {
+    if(authUser.isAdmin || authUser.id == id) {
       const userById = await User.findOne(id)
-      if (authUser.id === id && authUser.isAdmin && isAdmin === false) {
+      if (authUser.isAdmin && authUser.id == id && isAdmin === false) {
         throw new HttpException('Cannot change role for self', 400)
       } else {
         if (userById) {
