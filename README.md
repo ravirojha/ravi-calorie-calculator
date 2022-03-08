@@ -1,6 +1,6 @@
 # Calorie Calculator Application
 
-Live link - https://trackyourdiet.netlify.app/
+Live app link - https://trackyourdiet.netlify.app/
 
 ## Technologies Used
 
@@ -17,9 +17,9 @@ Live link - https://trackyourdiet.netlify.app/
 
 There are 2 users :- Regular user and Admin.
 
--> Users can manage food entries.  
--> A user can add a new food entry. 
--> A User can filter those entries by entry date (date from / date to). 
+-> Users can manage food entries.       
+-> A user can add a new food entry.      
+-> A User can filter those entries by entry date (date from / date to).      
 
 #### Calorie limit warning per day
 -> The daily threshold limit of calories is 2100 by default.   
