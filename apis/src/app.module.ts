@@ -8,9 +8,13 @@ import { AppController } from "./app.controller";
 import UsersController from "./app/controller/user.controller";
 import UsersService from "./app/service/user.service";
 import { AppService } from "./app.service";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'sqlite.db',
