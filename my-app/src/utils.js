@@ -4,7 +4,9 @@ export const Util = {
   sleep: (millis) => new Promise((resolve) => setTimeout(resolve, millis))
 };
 
-export const URL = 'http://localhost:3000';
+// export const URL = 'http://localhost:5000';
+
+export const URL = `https://track-calorie.herokuapp.com`;
 
 export const redColor = '#db2828';
 

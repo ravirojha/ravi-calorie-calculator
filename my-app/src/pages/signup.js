@@ -16,9 +16,11 @@ export default function SignUp() {
         event.preventDefault();
         if (validateSignUpForm(name, email, password)) {
             Auth.signup({name, email, password}).then((res) => {
-                toast().success("Signed Up Successfully");
+                console.log(res,'then');
+                toast.success("Signed Up Successfully");
                 navigate('/login')
             }).catch((error) => {
+                console.log(error,'catch');
                 toast.error(error?.response?.data?.message || "Something went wrong");
             });
         }
