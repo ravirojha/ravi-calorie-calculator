@@ -8,4 +8,4 @@ async function bootstrap() {
   await app.listen(PORT || 5000, () => {
   });
 }
-bootstrap();
+bootstrap().then();
