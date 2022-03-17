@@ -31,3 +31,4 @@ There are 2 users :- Regular user and Admin.
 -> Admin can also see the report screen with the following information.    
 > Number of added entries in the last 7 days vs. added entries the week before that.
 > The average number of calories added per user for the last 7 days
+-> Admin can see a screen with all existing users, edit their information and add new users.
