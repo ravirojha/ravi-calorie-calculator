@@ -24,7 +24,7 @@ There are 2 users :- Regular user and Admin.
 #### Calorie limit warning per day
 -> The daily threshold limit of calories is 2100 by default.   
 -> The users can see for which day they reached that limit.   
--> If a user has spent more than $1.000 per month, a warning message is shown to the user saying they reached the monthly limit.     
+-> If a user has spent more than 1000 per month, a warning message is shown to the user saying they reached the monthly limit.     
 
 #### Admin role
 -> Admin can see a screen with all added food entries of all users and manage existing food entries (read, update, create, delete).      
