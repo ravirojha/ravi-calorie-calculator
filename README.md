@@ -27,8 +27,8 @@ There are 2 users :- Regular user and Admin.
 -> If a user has spent more than 1000 per month, a warning message is shown to the user saying they reached the monthly limit.     
 
 #### Admin role
--> Admin can see a screen with all added food entries of all users and manage existing food entries (read, update, create, delete). 
--> Admin can see a screen with all existing users, edit their information and add new users.
--> Admin can also see the report screen with the following information.    
-> Number of added entries in the last 7 days vs. added entries the week before that.
-> The average number of calories added per user for the last 7 days
+-> Admin can see a screen with all added food entries of all users and manage existing food entries (read, update, create, delete).     
+-> Admin can see a screen with all existing users, edit their information and add new users.     
+-> Admin can also see the report screen with the following information.         
+> Number of added entries in the last 7 days vs. added entries the week before that.     
+> The average number of calories added per user for the last 7 days     
