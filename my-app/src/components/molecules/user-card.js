@@ -21,7 +21,7 @@ export default function UserCard({ userItem, isNew, change, reload }) {
             ))) toast.error("Provide a valid email address");
         else if (!userItemData.dailyCalorieLimit || userItemData.dailyCalorieLimit > 3500|| userItemData.dailyCalorieLimit < 100) toast.error("Enter valid calorie limit");
         else if (!userItemData.monthlyBudget || userItemData.monthlyBudget > 10000 || userItemData.monthlyBudget < 100) toast.error(("Enter valid monthly budget"));
-        else if (userItemData.password && userItemData.password.length < 4) {
+        else if (!userItemData.password || userItemData.password.length < 4) {
             toast.error("Password length must be atleast 4 characters long")
         }
         else return true;
